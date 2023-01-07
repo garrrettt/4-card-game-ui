@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Animated, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function PlayingCard({ dir = "front", value }: PlayingCardArgs) {
+export default function PlayingCard({ dir = "front", orientation = "vertical", value }: PlayingCardArgs) {
   const onCardPress = () => flip();
   const [rotation, setRotation] = useState(dir == "front" ? 0 : 180);
   const flipAnim = useRef(new Animated.Value(dir == "front" ? 0 : 180)).current;
@@ -60,11 +60,11 @@ export default function PlayingCard({ dir = "front", value }: PlayingCardArgs) {
   };
 
   return (
-    <Pressable onPress={onCardPress} style={ styles.playingCardContainer }>
+    <Pressable onPress={onCardPress} style={ [styles.playingCardContainer, orientation == "horizontal" ? styles.horizontal : null] }>
       <Animated.View style={[styles.card_front, styles.flipCardFront, flipAnimationStyleFront]}>
         <Text style={styles.text}>{ value }</Text>
       </Animated.View>
-      <Animated.View style={[, styles.card_back, styles.flipCardBack, flipAnimationStyleBack]}>
+      <Animated.View style={[styles.card_back, styles.flipCardBack, flipAnimationStyleBack]}>
         <ImageBackground 
           style={styles.card_back_background} 
           resizeMode="stretch" 
@@ -76,6 +76,7 @@ export default function PlayingCard({ dir = "front", value }: PlayingCardArgs) {
 
 interface PlayingCardArgs {
   dir?: "front" | "back",
+  orientation?: "vertical" | "horizontal",
   value: number,
 }
 
@@ -84,6 +85,11 @@ const styles = StyleSheet.create({
     aspectRatio: 3 / 4,
     width: "20%",
     borderRadius: 5,
+  },
+  horizontal: {
+    transform: [{
+      rotate: "90deg"
+    }]
   },
   playingCardShadow: {
     /* initially placed in both the front/back card animated views, but couldn't get to animated in

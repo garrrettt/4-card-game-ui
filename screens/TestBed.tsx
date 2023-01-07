@@ -16,6 +16,8 @@ export default function TestBed({ showcase }: TestBedArgs) {
     inner = <PlayingCard dir={"front"} value={1} />
   } else if (showcase == "card_back") {
     inner = <PlayingCard dir={"back"} value={1} />
+  } else if (showcase == "card_horizontal") {
+    inner = <PlayingCard orientation={"horizontal"} value={1} />
   }
 
   return (
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
 interface TestBedArgs { 
   showcase: "card_front" 
   | "card_back" 
+  | "card_horizontal"
   | "card_front_outline" 
   | "card_back_outline"
   | "card_front_highlight"

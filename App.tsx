@@ -5,9 +5,9 @@ const DEV_MODE = true;
 
 export default function App() {
   let content: React.ReactNode = null;
-  
+
   if (DEV_MODE) {
-    content = <TestBed showcase={"card_front"} />
+    content = <TestBed showcase={"card_horizontal"} />
   }
 
   return (
