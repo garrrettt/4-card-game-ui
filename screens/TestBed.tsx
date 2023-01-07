@@ -18,6 +18,10 @@ export default function TestBed({ showcase }: TestBedArgs) {
     inner = <PlayingCard dir={"back"} value={1} />
   } else if (showcase == "card_horizontal") {
     inner = <PlayingCard orientation={"horizontal"} value={1} />
+  } else if (showcase == "card_outlined") {
+    inner = <PlayingCard outlined value={1} />
+  } else if (showcase == "card_unflippable") {
+    inner = <PlayingCard flippable={false} value={1} />
   }
 
   return (
@@ -41,9 +45,8 @@ interface TestBedArgs {
   showcase: "card_front" 
   | "card_back" 
   | "card_horizontal"
-  | "card_front_outline" 
-  | "card_back_outline"
-  | "card_front_highlight"
-  | "card_back_highlight"
+  | "card_outlined" 
+  | "card_highlighted"
   | "bottom_action_tab"
+  | "card_unflippable"
 }

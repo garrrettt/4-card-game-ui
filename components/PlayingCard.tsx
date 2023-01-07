@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { Animated, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function PlayingCard({ dir = "front", orientation = "vertical", value }: PlayingCardArgs) {
-  const onCardPress = () => flip();
+export default function PlayingCard({ value, flippable = true, dir = "front", orientation = "vertical", outlined = false, highlighted = false }: PlayingCardArgs) {
+  const onCardPress = () => { if (flippable) flip() };
   const [rotation, setRotation] = useState(dir == "front" ? 0 : 180);
   const flipAnim = useRef(new Animated.Value(dir == "front" ? 0 : 180)).current;
   flipAnim.addListener(({ value }) => {
@@ -59,8 +59,10 @@ export default function PlayingCard({ dir = "front", orientation = "vertical", v
     perspective: 1000 
   };
 
+  const orientationStyle = orientation == "horizontal" ? styles.horizontal : null;
+  const outlineStyle = outlined ? styles.outlined : null;
   return (
-    <Pressable onPress={onCardPress} style={ [styles.playingCardContainer, orientation == "horizontal" ? styles.horizontal : null] }>
+    <Pressable onPress={onCardPress} style={ [styles.playingCardContainer, orientationStyle, outlineStyle] }>
       <Animated.View style={[styles.card_front, styles.flipCardFront, flipAnimationStyleFront]}>
         <Text style={styles.text}>{ value }</Text>
       </Animated.View>
@@ -75,16 +77,18 @@ export default function PlayingCard({ dir = "front", orientation = "vertical", v
 }
 
 interface PlayingCardArgs {
+  value: number,
+  flippable?: boolean,
   dir?: "front" | "back",
   orientation?: "vertical" | "horizontal",
-  value: number,
+  outlined?: boolean,
+  highlighted?: boolean,
 }
 
 const styles = StyleSheet.create({
   playingCardContainer: {
     aspectRatio: 3 / 4,
     width: "20%",
-    borderRadius: 5,
   },
   horizontal: {
     transform: [{
@@ -111,11 +115,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    height: "100%"
+    height: "100%",
+    borderRadius: 5,
   },
   card_back: {
     padding: 2.5,
     backgroundColor: "#D9D9D9",
+    borderRadius: 5,
   },
   card_back_background: {
     width: "100%",
@@ -131,5 +137,10 @@ const styles = StyleSheet.create({
   expand: {
     height: "100%",
     width: "100%",
+  },
+  outlined: {
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "#FAFF00",
   }
 });
