@@ -7,7 +7,7 @@ export default function App() {
   let content: React.ReactNode = null;
 
   if (DEV_MODE) {
-    content = <TestBed showcase={"card_unflippable"} />
+    content = <TestBed showcase={"bottom_action_tab"} />
   }
 
   return (

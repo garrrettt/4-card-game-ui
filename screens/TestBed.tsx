@@ -1,13 +1,7 @@
-// Here I want to visualize the different components including...
-// - back of card
-// - front of card
-// - both types of cards with an outline
-// - both types of cards with a highlight
-// - resized card (both front/back)
-// - Bottom action tab
-
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import PlayingCard from "../components/PlayingCard";
+import BottomActionTabDrawer from "../components/BottomActionTabDrawer";
+import BottomActionTab from "../components/BottomActionTab";
 
 export default function TestBed({ showcase }: TestBedArgs) {
   let inner: React.ReactNode = null;
@@ -22,6 +16,20 @@ export default function TestBed({ showcase }: TestBedArgs) {
     inner = <PlayingCard outlined value={1} />
   } else if (showcase == "card_unflippable") {
     inner = <PlayingCard flippable={false} value={1} />
+  } else if (showcase == "bottom_action_tab") {
+    inner = (
+      <BottomActionTabDrawer main={null}>
+        <BottomActionTab onPress={() => console.log("Pressed!")}>
+          <Text> Garrett drew a Swap card. Select a card or place in discard. </Text>
+        </BottomActionTab>
+        <BottomActionTab>
+          <Text> Knock </Text>
+        </BottomActionTab>
+        <BottomActionTab>
+          <Text> End Turn </Text>
+        </BottomActionTab>
+      </BottomActionTabDrawer>
+    );
   }
 
   return (
@@ -46,7 +54,6 @@ interface TestBedArgs {
   | "card_back" 
   | "card_horizontal"
   | "card_outlined" 
-  | "card_highlighted"
-  | "bottom_action_tab"
   | "card_unflippable"
+  | "bottom_action_tab"
 }
