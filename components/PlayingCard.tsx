@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Animated, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function PlayingCard({ value, flippable = true, dir = "front", orientation = "vertical", outlined = false }: PlayingCardArgs) {
+export default function PlayingCard({ value, flippable = true, dir = "front", orientation = "up", outlined = false }: PlayingCardArgs) {
   const onCardPress = () => { if (flippable) flip() };
   const [rotation, setRotation] = useState(dir == "front" ? 0 : 180);
   const flipAnim = useRef(new Animated.Value(dir == "front" ? 0 : 180)).current;
@@ -59,7 +59,19 @@ export default function PlayingCard({ value, flippable = true, dir = "front", or
     perspective: 1000 
   };
 
-  const orientationStyle = orientation == "horizontal" ? styles.horizontal : null;
+  const getOrientationStyle = (orientation: "up" | "down" | "left" | "right") => {
+    if (orientation == "up") {
+      return styles.orientationUp;
+    } else if (orientation == "down") {
+      return styles.orientationDown;
+    } else if (orientation == "left") {
+      return styles.orientationLeft;
+    } else if (orientation == "right") {
+      return styles.orientationRight;
+    }
+  }
+
+  const orientationStyle = getOrientationStyle(orientation);
   const outlineStyle = outlined ? styles.outlined : null;
   return (
     <Pressable onPress={onCardPress} style={ [styles.playingCardContainer, orientationStyle, outlineStyle] }>
@@ -80,7 +92,7 @@ interface PlayingCardArgs {
   value: number,
   flippable?: boolean,
   dir?: "front" | "back",
-  orientation?: "vertical" | "horizontal",
+  orientation?: "up" | "down" | "left" | "right",
   outlined?: boolean,
 }
 
@@ -89,9 +101,24 @@ const styles = StyleSheet.create({
     aspectRatio: 3 / 4,
     width: 70,
   },
-  horizontal: {
+  orientationRight: {
     transform: [{
       rotate: "90deg"
+    }]
+  },
+  orientationUp: {
+    transform: [{
+      rotate: "0deg"
+    }]
+  },
+  orientationDown: {
+    transform: [{
+      rotate: "180deg"
+    }]
+  },
+  orientationLeft: {
+    transform: [{
+      rotate: "-90deg"
     }]
   },
   playingCardShadow: {

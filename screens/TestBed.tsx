@@ -13,7 +13,7 @@ export default function TestBed({ showcase }: TestBedArgs) {
   } else if (showcase == "card_back") {
     inner = <PlayingCard dir={"back"} value={1} />
   } else if (showcase == "card_horizontal") {
-    inner = <PlayingCard orientation={"horizontal"} value={1} />
+    inner = <PlayingCard orientation={"left"} value={1} />
   } else if (showcase == "card_outlined") {
     inner = <PlayingCard outlined value={1} />
   } else if (showcase == "card_unflippable") {
@@ -43,7 +43,7 @@ export default function TestBed({ showcase }: TestBedArgs) {
       {value: 2, selected: false, outlined: false, side: "back"},
       {value: 9, selected: false, outlined: false, side: "front"},
     ];
-    inner = <Hand cardList={mockCardData} orientation={"horizontal"} playerName={"Garrett"}></Hand>
+    inner = <Hand cardList={mockCardData} orientation={"vertical"} playerName={"Garrett"} handPosition={"left"}></Hand>
   }
 
   return (
