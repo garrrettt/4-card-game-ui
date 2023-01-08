@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import PlayingCard from "../components/PlayingCard";
 import BottomActionTabDrawer from "../components/BottomActionTabDrawer";
 import BottomActionTab from "../components/BottomActionTab";
+import PlayerLabel from "../components/PlayerLabel";
 
 export default function TestBed({ showcase }: TestBedArgs) {
   let inner: React.ReactNode = null;
@@ -30,6 +31,10 @@ export default function TestBed({ showcase }: TestBedArgs) {
         </BottomActionTab>
       </BottomActionTabDrawer>
     );
+  } else if (showcase == "player_label_current") {
+    inner = <PlayerLabel current text={"Garrett"} />
+  } else if (showcase == "player_label") {
+    inner = <PlayerLabel text={"Garrett"} />
   }
 
   return (
@@ -56,4 +61,6 @@ interface TestBedArgs {
   | "card_outlined" 
   | "card_unflippable"
   | "bottom_action_tab"
+  | "player_label"
+  | "player_label_current"
 }

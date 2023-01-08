@@ -7,7 +7,7 @@ export default function App() {
   let content: React.ReactNode = null;
 
   if (DEV_MODE) {
-    content = <TestBed showcase={"bottom_action_tab"} />
+    content = <TestBed showcase={"player_label_current"} />
   }
 
   return (
