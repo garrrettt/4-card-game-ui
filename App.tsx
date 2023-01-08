@@ -7,7 +7,7 @@ export default function App() {
   let content: React.ReactNode = null;
 
   if (DEV_MODE) {
-    content = <TestBed showcase={"player_label_current"} />
+    content = <TestBed showcase={"hand"} />
   }
 
   return (

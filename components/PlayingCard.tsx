@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Animated, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function PlayingCard({ value, flippable = true, dir = "front", orientation = "vertical", outlined = false, highlighted = false }: PlayingCardArgs) {
+export default function PlayingCard({ value, flippable = true, dir = "front", orientation = "vertical", outlined = false }: PlayingCardArgs) {
   const onCardPress = () => { if (flippable) flip() };
   const [rotation, setRotation] = useState(dir == "front" ? 0 : 180);
   const flipAnim = useRef(new Animated.Value(dir == "front" ? 0 : 180)).current;
@@ -82,13 +82,12 @@ interface PlayingCardArgs {
   dir?: "front" | "back",
   orientation?: "vertical" | "horizontal",
   outlined?: boolean,
-  highlighted?: boolean,
 }
 
 const styles = StyleSheet.create({
   playingCardContainer: {
     aspectRatio: 3 / 4,
-    width: "20%",
+    width: 70,
   },
   horizontal: {
     transform: [{
