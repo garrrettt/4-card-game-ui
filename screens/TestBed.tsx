@@ -4,6 +4,21 @@ import BottomActionTabDrawer from "../components/BottomActionTabDrawer";
 import BottomActionTab from "../components/BottomActionTab";
 import PlayerLabel from "../components/PlayerLabel";
 import Hand, { CardInfo } from "../components/Hand";
+import GameScreen from "./GameScreen";
+
+const mockCardData: CardInfo[] = [
+  {value: 5, selected: false, outlined: false, side: "front"},
+  {value: 7, selected: true, outlined: false, side: "back"},
+  {value: 2, selected: false, outlined: false, side: "back"},
+  {value: 9, selected: false, outlined: false, side: "front"},
+];
+
+const mockCardData2: CardInfo[] = [
+  {value: 5, selected: false, outlined: false, side: "front"},
+  {value: 7, selected: false, outlined: false, side: "back"},
+  {value: 2, selected: false, outlined: false, side: "back"},
+  {value: 9, selected: false, outlined: false, side: "front"},
+];
 
 export default function TestBed({ showcase }: TestBedArgs) {
   let inner: React.ReactNode = null;
@@ -37,13 +52,9 @@ export default function TestBed({ showcase }: TestBedArgs) {
   } else if (showcase == "player_label") {
     inner = <PlayerLabel text={"Garrett"} />
   } else if (showcase == "hand") {
-    const mockCardData: CardInfo[] = [
-      {value: 5, selected: false, outlined: false, side: "front"},
-      {value: 7, selected: true, outlined: false, side: "back"},
-      {value: 2, selected: false, outlined: false, side: "back"},
-      {value: 9, selected: false, outlined: false, side: "front"},
-    ];
     inner = <Hand cardList={mockCardData} orientation={"vertical"} playerName={"Garrett"} handPosition={"left"}></Hand>
+  } else if (showcase == "game") {
+    inner = <GameScreen hands={[mockCardData2, mockCardData2, mockCardData2, mockCardData2]} />
   }
 
   return (
@@ -73,4 +84,5 @@ interface TestBedArgs {
   | "player_label"
   | "player_label_current"
   | "hand"
+  | "game"
 }
