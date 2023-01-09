@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import PlayerLabel from "./PlayerLabel";
 import PlayingCard from "./PlayingCard";
 
-export default function Hand({ cardList, orientation, playerName, handPosition }: HandArgs) {
+export default function Hand({ cardList, orientation, playerName, handPosition, currentPlayer = false }: HandArgs) {
   const orientationStyle = orientation == "horizontal" ? styles.horizontal : styles.vertical;
   const selectedCardStyle = (selected: boolean) => {
     if (!selected) return null; // no special styling if this card is not selected
@@ -47,7 +47,7 @@ export default function Hand({ cardList, orientation, playerName, handPosition }
         )}
       </View>
       <View style={ orientationStyle }>
-        <PlayerLabel current text={playerName} />
+        <PlayerLabel current={currentPlayer ? true : false} text={playerName} />
       </View>
     </View>
   );
@@ -59,6 +59,7 @@ interface HandArgs {
   playerName: string,
   // describes where a hand is being displayed on the screen
   handPosition: "top" | "bottom" | "left" | "right" 
+  currentPlayer?: boolean
 }
 
 // Likely will move this into the API file when I make that
