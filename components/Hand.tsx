@@ -30,11 +30,13 @@ export default function Hand({ cardList, orientation, playerName, handPosition }
     }
   }
   const cardOrientation = getCardOrientation();
+  // Note that in a full implementation, cards would be assigned a unique ID server-side
+  const getCardID = () => Math.floor(Math.random()*1000);
   return (
     <View style={ [styles.vertical, styles.alignCenter] }>
       <View style={ orientationStyle }>
         { cardList.map(cardInfo =>
-          <View style={[ styles.cardContainer, selectedCardStyle(cardInfo.selected) ]}>
+          <View style={[ styles.cardContainer, selectedCardStyle(cardInfo.selected) ]} key={getCardID()}>
             <PlayingCard 
               value={cardInfo.value} 
               dir={cardInfo.side} 
